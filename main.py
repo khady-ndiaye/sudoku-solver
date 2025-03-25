@@ -1,6 +1,6 @@
 import time
 from script import SudokuGrid
-from pygame_window import display_grid_pygame
+from pygame_window import SudokuPygame
 
 # Main function to run the program
 def main():
@@ -24,7 +24,10 @@ def main():
     print(f"Backtracking Execution Time : {time.time() - start_time:.5f} seconds")
     
     # Display the solved grid with Pygame
-    display_grid_pygame(sudoku)
+    # Creates an instance of SudokuDisplay
+    sudoku_dpygame = SudokuPygame(sudoku)
+    # Display the grid with Pygame  
+    sudoku_dpygame.start_display()  
     
     # Solving Sudoku with the Brute Force Method
     print("\nSolving Sudoku with the Brute Force Method:")
@@ -38,7 +41,7 @@ def main():
     print(f"Brute Force Execution Time : {time.time() - start_time:.5f} seconds")
     
     # Display the solved grid with Pygame
-    display_grid_pygame(sudoku)
+    SudokuPygame(sudoku)
 
 if __name__ == "__main__":
     main()

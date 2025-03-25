@@ -7,7 +7,7 @@ def main():
     sudoku = SudokuGrid()
     
     # Import grid from text file
-    sudoku.import_grid("sudoku_exemple.txt")  
+    sudoku.import_grid("sudoku4.txt")  
     
     # Display the initial grid in the terminal
     print("Initial grid:")
@@ -28,7 +28,7 @@ def main():
     
     # Solving Sudoku with the Brute Force Method
     print("\nSolving Sudoku with the Brute Force Method:")
-    sudoku.import_grid("sudoku_exemple.txt")  
+    sudoku.import_grid("sudoku4.txt")  
     start_time = time.time()
     if sudoku.solve_brute_force():
         print("Solution found:")

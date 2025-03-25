@@ -10,15 +10,15 @@ def display_grid_pygame(sudoku_grid):
     
     
     while True:
-        screen.fill((BLACK))
+        screen.fill((WHITE))
 
         # Draw the grid boxes
         for row in range(9):
             for col in range(9):
                 x, y = col * cell_size, row * cell_size
-                pygame.draw.rect(screen, (WHITE), (x, y, cell_size, cell_size), 2)
+                pygame.draw.rect(screen, (BLACK), (x, y, cell_size, cell_size), 2)
                 if sudoku_grid.grid[row][col] != 0:
-                    text = font.render(str(sudoku_grid.grid[row][col]), True, (WHITE))
+                    text = font.render(str(sudoku_grid.grid[row][col]), True, (BLACK))
                     screen.blit(text, (x + 20, y + 10))
                 
             # Draw the additional grid lines

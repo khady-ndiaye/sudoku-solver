@@ -14,24 +14,30 @@ class SudokuGrid:
     # Method to display grid in terminal
     def show_grid(self):
         for row in self.grid:
-            print(" ".join(str(num) if num != 0 else "_" for num in row))
+            print(" ".join(str(cell) if cell != 0 else '_' for cell in row))
 
     # Method to check if a digit is valid in a given position
     def is_valid(self, row, col, num):
         # Check line
-        if num in self.grid[row]:
-            return False
+        for i in range(9):
+            if self.grid[row][i] == num:
+                return False
+        
         # Check column
         for i in range(9):
             if self.grid[i][col] == num:
                 return False
+        
         # Check the 3x3 subgrid
-        start_row, start_col = 3 * (row // 3), 3 * (col // 3)
-        for i in range(start_row, start_row + 3):
-            for j in range(start_col, start_col + 3):
-                if self.grid[i][j] == num:
+        start_row = row - row % 3
+        start_col = col - col % 3
+        for i in range(3):
+            for j in range(3):
+                if self.grid[start_row + i][start_col + j] == num:
                     return False
+        
         return True
+
 
 
     # Method for solving the grid with the backtracking algorithm
@@ -54,13 +60,21 @@ class SudokuGrid:
 
     # Method to solve the grid with brute force
     def solve_brute_force(self):
+        # Find an empty box
         for row in range(9):
             for col in range(9):
-                if self.grid[row][col] == 0: 
+                if self.grid[row][col] == 0:  
+                    # Try the numbers 1 to 9
                     for num in range(1, 10):
-                        self.grid[row][col] = num
-                        if self.solve_brute_force():
-                            return True
-                        self.grid[row][col] = 0  
-                    return False
-        return True
+                        if self.is_valid(row, col, num):  
+                            self.grid[row][col] = num  
+                            # Recursive call to try to solve the rest of the Sudoku
+                            if self.solve_brute_force():
+                                return True
+                            # If the attempt fails, go back
+                            self.grid[row][col] = 0
+                    return False  
+        return True  
+
+        
+   

@@ -38,19 +38,6 @@ class SudokuGrid:
     def resolve_backtracking(self):
         for row in range(9):
             for col in range(9):
-                if self.grid[row][col] == 0:  
-                    for num in range(1, 10):
-                        if self.is_valid(row, col, num):
-                            self.grid[row][col] = num
-                            if self.resolve_backtracking():
-                                return True
-                            self.grid[row][col] = 0  
-                    return False
-        return True
-    
-    def resolve_backtracking(self):
-        for row in range(9):
-            for col in range(9):
                 if self.grid[row][col] == 0: 
                     for num in range(1, 10):
                         if self.is_valid(row, col, num):

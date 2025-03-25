@@ -5,9 +5,10 @@ class SudokuGrid:
         self.grid = [[0] * 9 for _ in range(9)]
 
     # Method to import and parse a grid from a file
-    def import_grid(self, fichier):
-        with open(fichier, "r") as f:
-            for i, line in enumerate(f):
+    def import_grid(self, filename):
+        with open(filename, "r") as file:
+            lines = file.readlines()
+            for i, line in enumerate(lines):
                 self.grid[i] = [int(c) if c != "_" else 0 for c in line.strip()]
 
     # Method to display grid in terminal

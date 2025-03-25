@@ -25,9 +25,10 @@ def main():
     
     # Display the solved grid with Pygame
     # Creates an instance of SudokuDisplay
-    sudoku_dpygame = SudokuPygame(sudoku)
+    sudoku_pygame = SudokuPygame(sudoku)
     # Display the grid with Pygame  
-    sudoku_dpygame.start_display()  
+    sudoku_pygame.start_display()
+     
     
     # Solving Sudoku with the Brute Force Method
     print("\nSolving Sudoku with the Brute Force Method:")
@@ -42,6 +43,7 @@ def main():
     
     # Display the solved grid with Pygame
     SudokuPygame(sudoku)
+    
 
 if __name__ == "__main__":
     main()

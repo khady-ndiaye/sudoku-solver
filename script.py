@@ -12,9 +12,12 @@ class SudokuGrid:
             for i in range(9):
                 for j in range(9):
                     num = lines[i][j]
-                    if num != '_':
+                    if num in ('_', '-'):
+                        self.grid[i][j] = 0
+                    else:
                         self.grid[i][j] = int(num)
-                        self.initial_grid[i][j] = int(num)  
+                        self.initial_grid[i][j] = int(num)
+  
 
     # Method to display grid in terminal
     def show_grid(self):
@@ -73,26 +76,23 @@ class SudokuGrid:
                     return False
         return True
 
-
-    # Method to solve the grid with brute force
     def solve_brute_force(self):
-        # Find an empty box
-        for row in range(9):
-            for col in range(9):
-                if self.grid[row][col] == 0:  
-                    # Try the numbers 1 to 9
-                    for num in range(1, 10):
-                        if self.is_valid(row, col, num):  
-                            self.grid[row][col] = num  
-                            # Recursive call to try to solve the rest of the Sudoku
-                            if self.solve_brute_force():
-                                return True
-                            # If the attempt fails, go back
-                            self.grid[row][col] = 0
-                    return False  
-        return True  
-    
-    
+        """Résout le Sudoku par force brute en testant toutes les combinaisons possibles."""
+        empty_cells = [(r, c) for r in range(9) for c in range(9) if self.grid[r][c] == 0]
 
-            
-    
+        def brute_force(index=0):
+            """Récursion pour essayer toutes les valeurs possibles dans les cases vides."""
+            if index == len(empty_cells):
+                return True  # Toutes les cases sont remplies, solution trouvée
+
+            row, col = empty_cells[index]
+            for num in range(1, 10):  # Essayer les chiffres de 1 à 9
+                if self.is_valid(row, col, num):
+                    self.grid[row][col] = num  # Placer le chiffre
+                    if brute_force(index + 1):  # Récursivité pour la case suivante
+                        return True
+                    self.grid[row][col] = 0  # Backtracking si l'essai ne fonctionne pas
+
+            return False  # Aucun chiffre ne fonctionne pour cette case
+
+        return brute_force()

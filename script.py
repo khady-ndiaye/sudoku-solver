@@ -1,4 +1,6 @@
 # Class representing the Sudoku grid
+from itertools import product
+import time
 class SudokuGrid:
     def __init__(self):
         # The Sudoku grid is initialized as a 9x9 matrix
@@ -77,22 +79,35 @@ class SudokuGrid:
         return True
 
     def solve_brute_force(self):
-        """Résout le Sudoku par force brute en testant toutes les combinaisons possibles."""
+        """Essaye toutes les combinaisons possibles sans retour en arrière."""
         empty_cells = [(r, c) for r in range(9) for c in range(9) if self.grid[r][c] == 0]
 
-        def brute_force(index=0):
-            """Récursion pour essayer toutes les valeurs possibles dans les cases vides."""
-            if index == len(empty_cells):
-                return True  # Toutes les cases sont remplies, solution trouvée
+        # Génère toutes les combinaisons possibles pour les cases vides
+        all_possibilities = product(range(1, 10), repeat=len(empty_cells))
+        start_time = time.time()  # Démarre le chronomètre
+        
 
-            row, col = empty_cells[index]
-            for num in range(1, 10):  # Essayer les chiffres de 1 à 9
-                if self.is_valid(row, col, num):
-                    self.grid[row][col] = num  # Placer le chiffre
-                    if brute_force(index + 1):  # Récursivité pour la case suivante
-                        return True
-                    self.grid[row][col] = 0  # Backtracking si l'essai ne fonctionne pas
+        for possibility in all_possibilities:
+            if time.time() - start_time > 60:  # Arrêter après 1 minute
+                print("Temps écoulé, arrêt des recherches.")
+                return False
+            temp_grid = [row[:] for row in self.grid] 
+            valid = True  # Vérifie si la combinaison est valide
 
-            return False  # Aucun chiffre ne fonctionne pour cette case
+            print(f"Test de la combinaison : {possibility}")  # Affichage des essais
 
-        return brute_force()
+            for idx, (row, col) in enumerate(empty_cells):
+                num = possibility[idx]
+                if self.is_valid(row, col, num):  
+                    temp_grid[row][col] = num
+                else:
+                    valid = False  # Si un chiffre ne respecte pas les règles, on arrête
+                    break  
+
+            if valid:  # Si une combinaison respecte les règles, on la garde
+                self.grid = temp_grid
+                print("Solution trouvée !")
+                return True  
+
+        print("Aucune solution trouvée.")
+        return False  # Aucune solution trouvée

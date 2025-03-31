@@ -87,35 +87,35 @@ class SudokuGrid:
         return True
 
     def solve_brute_force(self):
-        """Essaye toutes les combinaisons possibles sans retour en arrière."""
+        """Try all possible combinations without going back.."""
         empty_cells = [(r, c) for r in range(9) for c in range(9) if self.grid[r][c] == 0]
 
-        # Génère toutes les combinaisons possibles pour les cases vides
+        # Generates all possible combinations for empty squares
         all_possibilities = product(range(1, 10), repeat=len(empty_cells))
-        start_time = time.time()  # Démarre le chronomètre
+        start_time = time.time()  # Start the stopwatch
         
 
         for possibility in all_possibilities:
-            if time.time() - start_time > 60:  # Arrêter après 1 minute
-                print("Temps écoulé, arrêt des recherches.")
+            if time.time() - start_time > 60:  # Stop after 1 minute
+                print("Time out, search stopped.")
                 return False
             temp_grid = [row[:] for row in self.grid] 
-            valid = True  # Vérifie si la combinaison est valide
+            valid = True  # Check if the combination is valid
 
-            print(f"Test de la combinaison : {possibility}")  # Affichage des essais
+            print(f"Testing the suit : {possibility}")  # Display of tests
 
             for idx, (row, col) in enumerate(empty_cells):
                 num = possibility[idx]
                 if self.is_valid(row, col, num):  
                     temp_grid[row][col] = num
                 else:
-                    valid = False  # Si un chiffre ne respecte pas les règles, on arrête
+                    valid = False  # If a number doesn't follow the rules, we stop
                     break  
 
-            if valid:  # Si une combinaison respecte les règles, on la garde
+            if valid:  # If a combination respects the rules, we keep it.
                 self.grid = temp_grid
-                print("Solution trouvée !")
+                print("Solution found !")
                 return True  
 
-        print("Aucune solution trouvée.")
-        return False  # Aucune solution trouvée
+        print("No solutions found.")
+        return False  # No solutions found

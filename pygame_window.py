@@ -19,7 +19,7 @@ class SudokuPygame:
         for row in range(9):
             for col in range(9):
                 x, y = col * cell_size, row * cell_size
-                pygame.draw.rect(self.screen, (BLACK), (x, y, cell_size, cell_size), 2)
+                pygame.draw.rect(self.screen, (BLACK), (x, y, cell_size, cell_size), 1)
 
                 if self.sudoku_grid.grid[row][col] != 0:
                     # Determine the color (red for values ​​inserted by the algorithm)
@@ -34,8 +34,8 @@ class SudokuPygame:
         # Draw the extra lines for the 3x3 squares
         for i in range(1, 9):
             if i % 3 == 0:
-                pygame.draw.line(self.screen, (BLACK), (0, i * cell_size), (540, i * cell_size), 4)
-                pygame.draw.line(self.screen, (BLACK), (i * cell_size, 0), (i * cell_size, 540), 4)
+                pygame.draw.line(self.screen, (BLACK), (0, i * cell_size), (540, i * cell_size), 5)
+                pygame.draw.line(self.screen, (BLACK), (i * cell_size, 0), (i * cell_size, 540), 5)
 
         # Update the Pygame
         pygame.display.flip()
@@ -43,11 +43,14 @@ class SudokuPygame:
     def start_display(self):
         running = True
         while running:
+            self.draw_title("Sudoku Solver")
             self.draw_grid()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
                     pygame.quit()
                     return
+            
+            
 
 

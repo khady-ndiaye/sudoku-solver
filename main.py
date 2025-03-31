@@ -9,7 +9,8 @@ def menu_terminal():
     print("2. Grid 2")
     print("3. Grid 3")
     print("4. Grid 4")
-    print("5. Quitter")
+    print("5. Grid 5")
+    print("6. Quitter")
     
     grid_choice = input("Please choose a grid : ")
 
@@ -25,11 +26,13 @@ def menu_terminal_resolution():
 
     return method_choice
 
-
 # Main function to run the program
 def main():
+    """sudoku_pygame = SudokuPygame()   #####
+    sudoku = SudokuGrid(sudoku_pygame) ###"""
     sudoku = SudokuGrid()
-   
+    
+    #sudoku_pygame = SudokuPygame(sudoku) 
     # Menu in terminal to choose a grid
     print("Please choose a grid  :")
     grid_choice = menu_terminal()
@@ -41,8 +44,10 @@ def main():
     elif grid_choice == '3':
         sudoku.import_grid("sudoku3.txt")
     elif grid_choice == '4':
-        sudoku.import_grid("evilsudoku.txt")
+        sudoku.import_grid("sudoku4.txt")
     elif grid_choice == '5':
+        sudoku.import_grid("evilsudoku.txt")
+    elif grid_choice == '6':
         print("Thank you for using the Sudoku solver!")
         return
     else:
@@ -52,7 +57,10 @@ def main():
     # Display the initial grid in the terminal
     print("Initial grid:")
     sudoku.show_grid()
-    
+    # Display the solved grid with Pygame
+    """sudoku_pygame = SudokuPygame(sudoku)"""
+    #sudoku_pygame.start_display()
+
     # Menu in terminal to choose a method
     method_choice = menu_terminal_resolution()
     if method_choice == '1':
@@ -77,6 +85,8 @@ def main():
         else:
             print("No solutions found.")
         print(f"Brute Force Execution Time : {time.time() - start_time:.5f} seconds")
+
+    
     
     # Display the solved grid with Pygame
     sudoku_pygame = SudokuPygame(sudoku)

@@ -1,10 +1,12 @@
+import pygame 
+from pygame_window import *
 # Class representing the Sudoku grid
 class SudokuGrid:
     def __init__(self):
         # The Sudoku grid is initialized as a 9x9 matrix
         self.grid = [[0] * 9 for _ in range(9)]
         self.initial_grid = [[0] * 9 for _ in range(9)]
-
+        #self.sudoku_pygame = sudoku_pygame   ##########
     # Method to import and parse a grid from a file
     def import_grid(self, filename):
         with open(filename, 'r') as file:
@@ -54,8 +56,6 @@ class SudokuGrid:
         
         return True
 
-
-
     # Method for solving the grid with the backtracking algorithm
     def resolve_backtracking(self):
         for row in range(9):
@@ -65,32 +65,27 @@ class SudokuGrid:
                         if self.is_valid(row, col, num):
                             self.grid[row][col] = num
                             print(f"Attempt from {num} to ({row}, {col})")  
-                            self.show_grid()  
+                            self.show_grid()
+                            """if self.sudoku_pygame:  
+                                self.sudoku_pygame.draw_grid()  ######
+                                pygame.display.update()   ###########
+                                pygame.time.delay(500)    ##########"""
                             if self.resolve_backtracking():
                                 return True
                             self.grid[row][col] = 0  
                             print(f"Go back to ({row}, {col})")
+                            """if self.sudoku_pygame: 
+                                self.sudoku_pygame.draw_grid()  ######
+                                pygame.display.update()   ###########
+                                pygame.time.delay(500)    ##########"""
                     return False
         return True
 
-
     # Method to solve the grid with brute force
     def solve_brute_force(self):
-        # Find an empty box
-        for row in range(9):
-            for col in range(9):
-                if self.grid[row][col] == 0:  
-                    # Try the numbers 1 to 9
-                    for num in range(1, 10):
-                        if self.is_valid(row, col, num):  
-                            self.grid[row][col] = num  
-                            # Recursive call to try to solve the rest of the Sudoku
-                            if self.solve_brute_force():
-                                return True
-                            # If the attempt fails, go back
-                            self.grid[row][col] = 0
-                    return False  
-        return True  
+       pass
+    
+    
     
     
 

@@ -86,19 +86,9 @@ class SudokuGrid:
                     return False
         return True
 
-<<<<<<< HEAD
     def solve_brute_force(self):
         """Essaye toutes les combinaisons possibles sans retour en arrière."""
         empty_cells = [(r, c) for r in range(9) for c in range(9) if self.grid[r][c] == 0]
-=======
-    # Method to solve the grid with brute force
-    def solve_brute_force(self):
-       pass
-    
-    
-    
-    
->>>>>>> 0c777bfe3f739e988ba145c389318194ef804dfe
 
         # Génère toutes les combinaisons possibles pour les cases vides
         all_possibilities = product(range(1, 10), repeat=len(empty_cells))

@@ -1,3 +1,5 @@
+import pygame 
+from pygame_window import *
 # Class representing the Sudoku grid
 from itertools import product
 import time
@@ -6,7 +8,7 @@ class SudokuGrid:
         # The Sudoku grid is initialized as a 9x9 matrix
         self.grid = [[0] * 9 for _ in range(9)]
         self.initial_grid = [[0] * 9 for _ in range(9)]
-
+        #self.sudoku_pygame = sudoku_pygame   ##########
     # Method to import and parse a grid from a file
     def import_grid(self, filename):
         with open(filename, 'r') as file:
@@ -59,8 +61,6 @@ class SudokuGrid:
         
         return True
 
-
-
     # Method for solving the grid with the backtracking algorithm
     def resolve_backtracking(self):
         for row in range(9):
@@ -70,17 +70,35 @@ class SudokuGrid:
                         if self.is_valid(row, col, num):
                             self.grid[row][col] = num
                             print(f"Attempt from {num} to ({row}, {col})")  
-                            self.show_grid()  
+                            self.show_grid()
+                            """if self.sudoku_pygame:  
+                                self.sudoku_pygame.draw_grid()  ######
+                                pygame.display.update()   ###########
+                                pygame.time.delay(500)    ##########"""
                             if self.resolve_backtracking():
                                 return True
                             self.grid[row][col] = 0  
                             print(f"Go back to ({row}, {col})")
+                            """if self.sudoku_pygame: 
+                                self.sudoku_pygame.draw_grid()  ######
+                                pygame.display.update()   ###########
+                                pygame.time.delay(500)    ##########"""
                     return False
         return True
 
+<<<<<<< HEAD
     def solve_brute_force(self):
         """Essaye toutes les combinaisons possibles sans retour en arrière."""
         empty_cells = [(r, c) for r in range(9) for c in range(9) if self.grid[r][c] == 0]
+=======
+    # Method to solve the grid with brute force
+    def solve_brute_force(self):
+       pass
+    
+    
+    
+    
+>>>>>>> 0c777bfe3f739e988ba145c389318194ef804dfe
 
         # Génère toutes les combinaisons possibles pour les cases vides
         all_possibilities = product(range(1, 10), repeat=len(empty_cells))

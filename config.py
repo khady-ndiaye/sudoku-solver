@@ -1,7 +1,7 @@
 # Settings window 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 750
-FPS = 30
+FPS = 60
 
 # Colors
 WHITE = (255, 255, 255)

@@ -71,18 +71,11 @@ class SudokuGrid:
                             self.grid[row][col] = num
                             print(f"Attempt from {num} to ({row}, {col})")  
                             self.show_grid()
-                            """if self.sudoku_pygame:  
-                                self.sudoku_pygame.draw_grid()  ######
-                                pygame.display.update()   ###########
-                                pygame.time.delay(500)    ##########"""
                             if self.resolve_backtracking():
                                 return True
                             self.grid[row][col] = 0  
                             print(f"Go back to ({row}, {col})")
-                            """if self.sudoku_pygame: 
-                                self.sudoku_pygame.draw_grid()  ######
-                                pygame.display.update()   ###########
-                                pygame.time.delay(500)    ##########"""
+                            
                     return False
         return True
 

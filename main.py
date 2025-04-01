@@ -73,6 +73,19 @@ def main():
         else:
             print("No solutions found.")
         print(f"Backtracking Execution Time : {time.time() - start_time:.5f} seconds")
+        method_choice = menu_terminal_resolution()
+        if method_choice == '2':
+            
+            # Solving Sudoku with the Brute Force Method
+            print("\nSolving Sudoku with the Brute Force Method:")
+            sudoku.import_grid("sudoku4.txt")  
+            start_time = time.time()
+            if sudoku.solve_brute_force():
+                print("Solution found:")
+                sudoku.show_grid()
+            else:
+                print("No solutions found.")
+            print(f"Brute Force Execution Time : {time.time() - start_time:.5f} seconds")
 
     elif method_choice == '2':
         # Solving Sudoku with the Brute Force Method
@@ -85,7 +98,7 @@ def main():
         else:
             print("No solutions found.")
         print(f"Brute Force Execution Time : {time.time() - start_time:.5f} seconds")
-
+        
     
     
     # Display the solved grid with Pygame

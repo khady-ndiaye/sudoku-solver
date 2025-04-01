@@ -12,6 +12,26 @@ class SudokuPygame:
         title_text = self.font.render(title, True, BLACK)
         self.screen.blit(title_text, (SCREEN_WIDTH // 2 - title_text.get_width() // 2, 10))
 
+    def draw_button(self):
+        # Position et taille du bouton
+        button_width = 200
+        button_height = 50
+        button_x = (540 - button_width) // 2  # Centré horizontalement
+        button_y = 550  # Juste en dessous de la grille
+
+        # Couleur du bouton
+        button_color = (0, 255, 0)  # Vert
+        button_border_color = (0, 200, 0)  # Bordure verte
+
+        # Dessiner le bouton
+        pygame.draw.rect(self.screen, button_color, (button_x, button_y, button_width, button_height))
+        pygame.draw.rect(self.screen, button_border_color, (button_x, button_y, button_width, button_height), 3)
+
+        # Texte du bouton
+        button_text = self.font.render("Solve Sudoku", True, (255, 255, 255))  # Texte blanc
+        self.screen.blit(button_text, (button_x + (button_width - button_text.get_width()) // 2, 
+                                      button_y + (button_height - button_text.get_height()) // 2))
+
     def draw_grid(self):
         self.screen.fill((WHITE))  
 
@@ -44,6 +64,7 @@ class SudokuPygame:
         running = True
         while running:
             self.draw_title("Sudoku Solver")
+            self.draw_button()
             self.draw_grid()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

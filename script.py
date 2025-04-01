@@ -82,19 +82,16 @@ class SudokuGrid:
     def solve_brute_force(self):
         """Try all possible combinations without going back.."""
         empty_cells = [(r, c) for r in range(9) for c in range(9) if self.grid[r][c] == 0]
-
         # Generates all possible combinations for empty squares
         all_possibilities = product(range(1, 10), repeat=len(empty_cells))
         start_time = time.time()  # Start the stopwatch
         
-
         for possibility in all_possibilities:
             if time.time() - start_time > 60:  # Stop after 1 minute
                 print("Time out, search stopped.")
                 return False
             temp_grid = [row[:] for row in self.grid] 
             valid = True  # Check if the combination is valid
-
             print(f"Testing the suit : {possibility}")  # Display of tests
 
             for idx, (row, col) in enumerate(empty_cells):
@@ -109,6 +106,5 @@ class SudokuGrid:
                 self.grid = temp_grid
                 print("Solution found !")
                 return True  
-
         print("No solutions found.")
         return False  # No solutions found

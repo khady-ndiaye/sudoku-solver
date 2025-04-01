@@ -39,12 +39,17 @@ La méthode de **Brute Force** est une approche exhaustive et essaie toutes les 
 
 ### Principe :
 
-1. Commence par tester toutes les valeurs possibles dans les cases vides.
-2. Pour chaque case vide, essaie toutes les valeurs possibles (1 à 9).
-3. Chaque valeur est insérée et le programme vérifie si la grille respecte les règles du Sudoku.
-4. Si la grille est valide, on passe à la case suivante.
-5. Si la grille est invalide, on "recommence" en essayant une autre valeur pour la dernière case remplie, et ainsi de suite.
-6. Cette méthode essaie toutes les combinaisons possibles sans aucune tentative d'optimisation.
+1. Lister toutes les possibilités
+   - On génère toutes les combinaisons possibles de solutions.
+2. Tester chaque solution une par une
+   - On prend une solution, on la met à l’épreuve et on vérifie si elle fonctionne.
+3. Arrêter dès qu’on trouve la bonne
+   - Si la solution est correcte, on s’arrête immédiatement.
+4. Continuer jusqu’à épuisement des options
+   - Si aucune solution ne fonctionne, c'est que le problème n’a pas de réponse valide.
+
+
+
 
 ### Caractéristiques :
 
@@ -90,3 +95,9 @@ La méthode de **Brute Force** est une approche exhaustive et essaie toutes les 
 
 - **Backtracking** : C'est la méthode la plus couramment utilisée pour résoudre des grilles de Sudoku, en particulier lorsque l'on veut de l'efficacité tout en restant simple.
 - **Brute Force** : Est une approche "très naïve" qui est rarement utilisée dans des applications réelles, mais qui peut être utilisée pour des problèmes très simples ou pour comprendre les bases de la résolution de Sudoku. Elle est également utilisée lorsque vous voulez garantir que toutes les combinaisons possibles sont explorées, mais elle est généralement trop lente pour des grilles de grande taille ou des grilles complexes.
+
+## Exemple de mise en œuvre :
+Si vous voulez implémenter les deux méthodes, on peux les utiliser dans notre code comme suit :
+* Backtracking est plus adapté pour des grilles de taille standard (9x9), car il est assez rapide pour résoudre des grilles classiques.
+* Brute Force, bien qu'il trouve toujours une solution, devrait être utilisé dans des cas où le temps d'exécution n'est pas une contrainte.
+En résumé, pour des grilles de Sudoku réelles, Backtracking est la méthode préférée en raison de son efficacité, tandis que Brute Force est plus comme une approche "par défaut" ou pour tester toutes les possibilités dans des scénarios où l'efficacité n'est pas une priorité.
